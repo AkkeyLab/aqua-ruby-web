@@ -5,6 +5,12 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     @app_name = "aqua.rb"
   end
 
+  test "should get root" do
+    get root_url
+    assert_response :success
+    assert_select "title", "Home | #{@app_name}"
+  end
+
   test "should get home" do
     get static_pages_home_url
     assert_response :success
