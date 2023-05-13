@@ -12,7 +12,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get Home" do
-    get home_path
+    get top_path
     assert_response :success
     assert_select "title", @app_name
   end
