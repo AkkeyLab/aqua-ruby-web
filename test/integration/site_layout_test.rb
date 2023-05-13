@@ -12,6 +12,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", about_path
     # Contact-text in Footer
     assert_select "a[href=?]", contact_path
+    # SignUp button in Home
+    assert_select "a[href=?]", signup_path
   end
 
   test "title text" do
