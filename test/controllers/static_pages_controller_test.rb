@@ -30,7 +30,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get Contact' do
-    get contact_path
+    get help_path # github actions test
     assert_response :success
     assert_select 'title', "Contact | #{@app_name}"
   end
