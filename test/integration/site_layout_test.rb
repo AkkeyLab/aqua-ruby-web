@@ -13,4 +13,9 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # Contact-text in Footer
     assert_select "a[href=?]", contact_path
   end
+
+  test "title text" do
+    get contact_path
+    assert_select "title", full_title("Contact")
+  end
 end
