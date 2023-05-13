@@ -1,0 +1,24 @@
+# doc: https://docs.github.com/ja/enterprise-cloud@latest/actions/automating-builds-and-tests/building-and-testing-ruby
+name: Rails Test
+
+on: [ push ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        with:
+          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          bundle config set --local without 'production'
+          bundle install
+      - name: Migrate database
+        run: bundle exec rails db:migrate
+      - name: Run tests
+        run: bundle exec rails test
