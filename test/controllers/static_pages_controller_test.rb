@@ -6,31 +6,31 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get Root" do
-    get root_url
+    get root_path
     assert_response :success
     assert_select "title", @app_name
   end
 
   test "should get Home" do
-    get static_pages_home_url
+    get home_path
     assert_response :success
     assert_select "title", @app_name
   end
 
   test "should get Help" do
-    get static_pages_help_url
+    get help_path
     assert_response :success
     assert_select "title", "Help | #{@app_name}"
   end
 
   test "should get About" do
-    get static_pages_about_url
+    get about_path
     assert_response :success
     assert_select "title", "About | #{@app_name}"
   end
 
   test "should get Contact" do
-    get static_pages_contact_url
+    get contact_path
     assert_response :success
     assert_select "title", "Contact | #{@app_name}"
   end
