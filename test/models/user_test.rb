@@ -5,8 +5,8 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(
       name: 'akkey',
       email: 'akkey@rails.rb',
-      password: 'pass',
-      password_confirmation: 'pass'
+      password: 'password',
+      password_confirmation: 'password'
     )
   end
 
@@ -74,5 +74,19 @@ class UserTest < ActiveSupport::TestCase
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+
+  test 'password should be present (nonblank)' do
+    @user.password = @user.password_confirmation = ' '
+    assert_not @user.valid?
+    @user.password = @user.password_confirmation = ' ' * 6
+    assert_not @user.valid?
+  end
+
+  test 'password should have a minimum length' do
+    @user.password = @user.password_confirmation = 'A' * 5
+    assert_not @user.valid?
+    @user.password = @user.password_confirmation = 'A' * 6
+    assert @user.valid?
   end
 end
