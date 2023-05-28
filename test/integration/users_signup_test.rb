@@ -40,5 +40,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'users/show'
     assert_select 'title', "Ai Hoshino | #{@app_name}"
+    assert flash.count == 1
+    assert flash[:success] == 'Welcome to the aqua.rb !'
   end
 end
