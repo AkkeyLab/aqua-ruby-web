@@ -23,4 +23,22 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'li', 'Password is too short (minimum is 6 characters)'
     assert_select 'div.alert', 'The form contains 1 error.'
   end
+
+  test 'valid signup information' do
+    get signup_path
+    assert_difference 'User.count', 1 do
+      user = {
+        name: 'Ai Hoshino',
+        email: 'hoshino@bkomachi.ai',
+        password: 'password',
+        password_confirmation: 'password'
+      }
+      post users_path, params: { user: user }
+    end
+
+    assert_response :found # 302 Redirect
+    follow_redirect!
+    assert_template 'users/show'
+    assert_select 'title', "Ai Hoshino | #{@app_name}"
+  end
 end
