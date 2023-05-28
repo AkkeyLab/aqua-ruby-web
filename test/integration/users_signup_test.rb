@@ -20,5 +20,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_template 'users/new'
     assert_select 'title', "Sign Up | #{@app_name}"
+    assert_select 'li', 'Password is too short (minimum is 6 characters)'
+    assert_select 'div.alert', 'The form contains 1 error.'
   end
 end
