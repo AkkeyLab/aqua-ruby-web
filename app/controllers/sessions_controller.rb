@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && is_auth_user
       # TODO: Show redirect to user page
     else
-      # TODO: Show error message
+      flash[:danger] = 'Invalid email or password, combination'
       render 'new', status: :unprocessable_entity
     end
   end
