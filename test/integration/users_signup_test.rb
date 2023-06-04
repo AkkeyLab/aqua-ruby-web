@@ -18,6 +18,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
+    assert_not is_logged_in?
     assert_template 'users/new'
     assert_select 'title', "Sign Up | #{@app_name}"
     assert_select 'li', 'Password is too short (minimum is 6 characters)'
@@ -38,6 +39,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     assert_response :found # 302 Redirect
     follow_redirect!
+    assert is_logged_in?
     assert_template 'users/show'
     assert_select 'title', "Ai Hoshino | #{@app_name}"
     assert flash.count == 1
