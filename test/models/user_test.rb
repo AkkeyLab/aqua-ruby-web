@@ -96,5 +96,6 @@ class UserTest < ActiveSupport::TestCase
     @user.remember
     assert @user.remember_token
     assert @user.remember_digest
+    assert @user.remember_token != @user.remember_digest
   end
 end
