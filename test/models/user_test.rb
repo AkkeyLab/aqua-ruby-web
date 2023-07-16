@@ -94,8 +94,10 @@ class UserTest < ActiveSupport::TestCase
     assert_nil @user.remember_token
     assert_nil @user.remember_digest
     @user.remember
-    assert @user.remember_token
+    remember_token = @user.remember_token
+    assert remember_token
     assert @user.remember_digest
     assert @user.remember_token != @user.remember_digest
+    assert @user.authenticated?(remember_token)
   end
 end
