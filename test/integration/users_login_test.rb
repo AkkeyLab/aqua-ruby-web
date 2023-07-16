@@ -48,6 +48,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert is_logged_in?
     follow_redirect!
     delete logout_path
+    delete logout_path # Should not crash if called twice
     assert_not is_logged_in?
     assert_response :see_other
     assert_redirected_to root_url
