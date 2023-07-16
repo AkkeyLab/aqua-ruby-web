@@ -89,4 +89,12 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = 'A' * 6
     assert @user.valid?
   end
+
+  test 'remember' do
+    assert_nil @user.remember_token
+    assert_nil @user.remember_digest
+    @user.remember
+    assert @user.remember_token
+    assert @user.remember_digest
+  end
 end
