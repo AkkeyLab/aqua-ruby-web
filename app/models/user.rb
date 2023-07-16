@@ -27,6 +27,11 @@ class User < ApplicationRecord
         self.remember_token = User.new_token
         # Only store the digest
         update_attribute(:remember_digest, User.digest(remember_token))
+        session_token
+    end
+
+    def session_token
+        remember_digest || remember
     end
 
     def authenticated?(remember_token)
